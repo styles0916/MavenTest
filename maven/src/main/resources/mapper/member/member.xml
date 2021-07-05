@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<select id="selectList" resultType="chapter09.MemberVo">
+		SELECT mno, mname, email
+		FROM
+		members
+		ORDER BY
+		mno ASC
+	</select>
+
+	<select id="login" parameterType="chapter09.MemberVo"
+		resultType="chapter09.MemberVo">
+		SELECT mno
+		FROM members
+		WHERE
+		email=#{email}
+		AND
+		pwd=#{pwd}
+	</select>
+
+	<!-- <select id="selectOne" parameterType="chapter08.MemberVo" resultType="chapter08.MemberVo"> -->
+	<select id="selectOne" parameterType="int"
+		resultType="chapter09.MemberVo">
+		SELECT *
+		FROM members
+		WHERE mno=#{mno}
+	</select>
+
+	<update id="update" parameterType="chapter09.MemberVo">
+		UPDATE members
+		SET mname=#{mname}, email=#{email}
+		<if test="pwd != ''">, pwd=#{pwd}</if>
+		WHERE mno=#{mno}
+	</update>
+	
+	<insert id="insert" parameterType="chapter09.MemberVo" useGeneratedKeys="true">
+		INSERT INTO members
+		(email, mname, pwd, cre_date, mod_date)
+		VALUES
+		(#{email}, #{mname}, #{pwd}, NOW(), NOW())
+		
+		<selectKey keyProperty="mno" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="insertSchool" parameterType="map">
+		INSERT INTO school
+		(members_mno, school, year)
+		VALUES
+		(#{members_mno}, #{school}, #{year})
+	</insert>
+</mapper>

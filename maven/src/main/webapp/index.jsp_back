@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// response.sendRedirect("index.do"); // 서버단에서 이동, 호출에 대한 응답 없이 바로 페이지 이동.
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+// location.href="index.do"; // 클라이언트단에서 이동, 호출에 대한 응답 이후, 페이지 이동.
+</script>
+</head>
+<body>
+<h1>webapp 밑에 index.jsp</h1>
+</body>
+</html>
