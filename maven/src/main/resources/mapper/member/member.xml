@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-	<select id="selectList" resultType="chapter09.MemberVo">
+	<select id="selectList" resultType="chapter12.MemberVo">
 		SELECT mno, mname, email
 		FROM
 		members
@@ -12,8 +12,7 @@
 		mno ASC
 	</select>
 
-	<select id="login" parameterType="chapter09.MemberVo"
-		resultType="chapter09.MemberVo">
+	<select id="login" parameterType="chapter12.MemberVo" resultType="chapter12.MemberVo">
 		SELECT mno
 		FROM members
 		WHERE
@@ -23,21 +22,20 @@
 	</select>
 
 	<!-- <select id="selectOne" parameterType="chapter08.MemberVo" resultType="chapter08.MemberVo"> -->
-	<select id="selectOne" parameterType="int"
-		resultType="chapter09.MemberVo">
+	<select id="selectOne" parameterType="int" resultType="chapter12.MemberVo">
 		SELECT *
 		FROM members
 		WHERE mno=#{mno}
 	</select>
 
-	<update id="update" parameterType="chapter09.MemberVo">
+	<update id="update" parameterType="chapter12.MemberVo">
 		UPDATE members
 		SET mname=#{mname}, email=#{email}
 		<if test="pwd != ''">, pwd=#{pwd}</if>
 		WHERE mno=#{mno}
 	</update>
 	
-	<insert id="insert" parameterType="chapter09.MemberVo" useGeneratedKeys="true">
+	<insert id="insert" parameterType="chapter12.MemberVo" useGeneratedKeys="true">
 		INSERT INTO members
 		(email, mname, pwd, cre_date, mod_date)
 		VALUES
@@ -47,11 +45,17 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+	 
 	<insert id="insertSchool" parameterType="map">
 		INSERT INTO school
 		(members_mno, school, year)
 		VALUES
 		(#{members_mno}, #{school}, #{year})
 	</insert>
+	
+	<select id="selectOneByEmail" resultType="chapter12.MemberVo" parameterType="String">
+		SELECT *
+		FROM members
+		WHERE email=#{email}
+	</select>
 </mapper>

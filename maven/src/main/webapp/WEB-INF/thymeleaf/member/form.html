@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>로그인폼</h2>
+
+<form method="POST" action="/maven/auth">
+	<table border="1">
+		<tr>
+			<td>이메일</td>
+			<td><input type="text" name="email"></td> <!-- 따로 설정을 해줬기 때문에 username이 아니라 email로 쓸 수 있음 -->
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="password" name="pwd"></td> <!-- 따로 설정을 해줬기 때문에 password이 아니라 pwd로 쓸 수 있음 -->
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" value="로그인"></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

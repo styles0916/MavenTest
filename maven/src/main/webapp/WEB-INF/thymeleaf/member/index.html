@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- 타임리프를 쓰겠다 선언 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:insert="~{/member/header::head}"></div>
+	<div th:replace="~{/member/header::head}"></div>
+	
+	<div th:text="${name}"></div>
+	
+	<div th:text="${name1}"><!-- 여기에 텍스트가 들어감, 이순신은 출력 안됨 -->이순신</div>
+	<div th:text="${name2}"><!-- 여기에 텍스트가 들어감, 이순신은 출력 안됨 -->이순신</div>
+	<div th:utext="${name3}"><!-- 여기에 텍스트가 들어감, 이순신은 출력 안됨 -->이순신</div>
+	
+	<div>[[${name2}]]</div>
+	<div>[(${name2})]</div>
+	
+	<!-- 조건문 -->
+	<th:block th:if="${memberinfo}">
+		로그인되어있음
+	</th:block>
+	<th:block th:unless="${memberinfo}">
+		로그인 안되어있음
+	</th:block>
+	
+	<table border="1">
+		<tr>
+			<td>인덱스</td>
+			<td>번호</td>
+			<td>이름</td>
+			<td>이메일</td>
+		</tr>
+		
+		<!-- 반복문 -->
+		<tr th:each="vo,index:${list}">
+			<td th:text="${index.index}"></td>
+			<td th:text="${vo.mno}"></td>
+			<td>
+				<!-- URL 처리 -->
+				<!-- @{/member/view.do} : Context-Path가 자동으로 붙음 -->
+				<!-- @{/member/view.do(no=${vo.mno}, sval=${vo.mname})} : 파라미터를 편하게 전달 -->
+				<a th:href="@{/member/view.do(no=${vo.mno}, sval=${vo.mname})}" th:text="${vo.mname}"></a>
+			</td>
+			<td th:text="${vo.email}"></td>
+		</tr>
+		
+	</table>
+</body>
+</html>
